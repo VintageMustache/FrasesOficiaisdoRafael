@@ -1,0 +1,44 @@
+/*
+ * Copyright 2011 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.gradle.api;
+
+import groovy.lang.Closure;
+import org.gradle.api.provider.Provider;
+import org.gradle.api.specs.Spec;
+import org.gradle.api.tasks.Internal;
+
+import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.List;
+import java.util.SortedMap;
+import java.util.SortedSet;
+
+/**
+ * <p>A {@code NamedDomainObjectCollection} represents a collection of domain objects that have an inherent, constant, name.</p>
+ *
+ * <p>Objects to be added to a named domain object collection must implement {@code equals()} in such a way that no two objects
+ * with different names are considered equal. That is, all equality tests <strong>must</strong> consider the name as an
+ * equality key. Behavior is undefined if two objects with different names are considered equal by their {@code equals()} implementation.</p>
+ *
+ * <p>All implementations <strong>must</strong> guarantee that all elements in the collection are uniquely named. That is,
+ * an attempt to add an object with a name equal to the name of any existing object in the collection will fail.
+ * Implementations may choose to simply return false from {@code add(T)} or to throw an exception.</p>
+ *
+ * <p>Objects in the collection are accessible as read-only properties, using the name of the object
+ * as the property name. For example (assuming the 'name' property provides the object name):</p>
+ *
+ * <pre>
+ * books.add(new Book(name: "gradle", title: null))
